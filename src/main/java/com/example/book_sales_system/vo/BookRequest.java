@@ -2,7 +2,7 @@ package com.example.book_sales_system.vo;
 
 public class BookRequest {
 
-    private String isbn ;
+    private String isbn;
     private String bookName;
     private String author;
     private int price;

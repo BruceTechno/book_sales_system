@@ -20,9 +20,9 @@ public class BookController {
     public BookResponse searchBookByCategory(@RequestBody BookRequest request){
         return bookService.searchBookByCategory(request);
     }
-//    @PostMapping(value = "searchBookAccordingBy")
-//    public BookResponse searchBookAccordingBy(@RequestBody BookRequest request){
-//        return bookService.searchBookAccordingBy(request);
-//    }
+    @PostMapping(value = "searchBookAccordingBy")
+    public BookResponse searchBookAccordingBy(@RequestBody BookRequest request){
+        return bookService.searchBookAccordingBy(request);
+    }
 
 }

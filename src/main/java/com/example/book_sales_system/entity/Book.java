@@ -23,6 +23,7 @@ public class Book {
     private int salesFigures;
     @Column(name = "category")
     private String category ;
+    private boolean isCustomer ;
 //============================================================================================================
 
     public Book() {

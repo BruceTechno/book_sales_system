@@ -46,46 +46,45 @@ public class BookServiceImpl implements BookService {
 //        return null;
     }
 
-//    @Override
-//    public BookResponse searchBookAccordingBy(BookRequest request) {//search By book name or ISBN OR author
-//        String identity = request.getIdentity();
-//
-////        String bookName = request.getBookName();
-////        String isbn = request.getIsbn();
-////        String author = request.getAuthor();
-//        String keyword = request.getKeyword();//keyword could be  bookName or isbn or author
-//        if ( !StringUtils.hasText(identity) || !StringUtils.hasText(keyword))  {
-//            return new BookResponse(RtnCode.CANNOT_EMPTY.getMessage());
-//        }
-//        String customerPattern = "消費者";
-//        String venderPattern = "書籍商";
-////        if (identity.matches(customerPattern)) {
-////            List<CustomerResponse> customerResult = bookDao.customerSearchByNameORIsbnOrAuthor(keyword);
-////            if (CollectionUtils.isEmpty(customerResult)){
-////                return new BookResponse(RtnCode.NOT_FOUND.getMessage());//找不到這本書
-////            }
-////            return new BookResponse(RtnCode.SUCCESSFUL.getMessage(),customerResult);
-////        }
-//        if (identity.matches(venderPattern)) {
-//            List<VenderResponse> venderResult = bookDao.venderSearchByNameORIsbnOrAuthor(keyword);
-//            if (CollectionUtils.isEmpty(venderResult)){
-//                return new BookResponse(RtnCode.NOT_FOUND.getMessage());
-//            }
-//
-//            return new BookResponse(RtnCode.SUCCESSFUL.getMessage(),venderResult);
-//        }
-//        return null;
-//    }//todo BookResponse無法同時放List<CustomerResponse> List<VenderResponse>
+    @Override //
+    public BookResponse searchBookAccordingBy(BookRequest request) {//search By book name or ISBN OR author
+        String identity = request.getIdentity();
 
-//    @Override
-//    public BookResponse updateBookInfo(BookRequest request) {
-//        int inventory = request.getInventory();
-//        int price = request.getPrice();
-//        String category = request.getCategory();
-//        if (inventory < 0 || price <0 || !StringUtils.hasText(category)){
-//            return new BookResponse(RtnCode.DATA_ERROR.getMessage());
-//        }
-//
-//        return null;
-//    }
+//        String bookName = request.getBookName();
+//        String isbn = request.getIsbn();
+//        String author = request.getAuthor();
+        String keyword = request.getKeyword();//keyword could be  bookName or isbn or author
+        if ( !StringUtils.hasText(identity) || !StringUtils.hasText(keyword))  {
+            return new BookResponse(RtnCode.CANNOT_EMPTY.getMessage());
+        }
+        String customerPattern = "消費者";
+        String venderPattern = "書籍商";
+        if (identity.matches(customerPattern)) {
+            List<CustomerResponse> customerResult = bookDao.customerSearchByNameORIsbnOrAuthor(keyword);
+            if (CollectionUtils.isEmpty(customerResult)){
+                return new BookResponse(RtnCode.NOT_FOUND.getMessage());//找不到這本書
+            }
+            return new BookResponse(RtnCode.SUCCESSFUL.getMessage(),customerResult);
+        }
+        if (identity.matches(venderPattern)) {
+            List<VenderResponse> venderResult = bookDao.venderSearchByNameORIsbnOrAuthor(keyword);
+            if (CollectionUtils.isEmpty(venderResult)){
+                return new BookResponse(RtnCode.NOT_FOUND.getMessage());
+            }
+
+            return new BookResponse(RtnCode.SUCCESSFUL.getMessage(),venderResult);
+        }
+        return null;
+    }//todo BookResponse無法同時放List<CustomerResponse> List<VenderResponse> done
+
+    @Override
+    public BookResponse updateBookInfo(BookRequest request) {
+        int inventory = request.getInventory();
+        int price = request.getPrice();
+        String category = request.getCategory();
+        if (inventory < 0 || price <0 || !StringUtils.hasText(category)){
+            return new BookResponse(RtnCode.DATA_ERROR.getMessage());
+        }
+        return null;
+    }
 }
