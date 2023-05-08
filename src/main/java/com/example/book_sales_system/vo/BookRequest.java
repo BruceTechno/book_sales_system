@@ -10,12 +10,21 @@ public class BookRequest {
     private int salesFigures;
     private String category;
     private String identity;
+    private String keyword;
 //================================================================================================
 
     public BookRequest() {
     }
 //================================================================================================
 
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
 
     public String getIdentity() {
         return identity;

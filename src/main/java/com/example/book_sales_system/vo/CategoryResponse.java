@@ -5,6 +5,7 @@ public class CategoryResponse {
     private String author;
     private int price;
     private int inventory;
+
 //==============================================================================================================
 
     public CategoryResponse() {
