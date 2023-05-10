@@ -1,6 +1,8 @@
 package com.example.book_sales_system.repository;
 
 import com.example.book_sales_system.entity.Book;
+import com.example.book_sales_system.entity.ShenHeBook;
+import com.example.book_sales_system.service.ifs.TopFiveProjection;
 import com.example.book_sales_system.vo.CategoryResponse;
 import com.example.book_sales_system.vo.CustomerResponse;
 import com.example.book_sales_system.vo.VenderResponse;
@@ -41,14 +43,30 @@ public interface BookDao extends JpaRepository<Book,String> {
     public List<VenderResponse> venderSearchByNameORIsbnOrAuthor(@Param("inputKeyword")String keyword);
     @Transactional
     @Modifying
-    @Query("update Book b set b.inventory = :newInventory , b.category = :newCategory , b.price = :newPrice  where b.isbn = :newIsbn")
-    public int updateBookInventory(
-            @Param("newInventory")String inventory,
-            @Param("newCategory")String category,
+    @Query("update Book b set b.inventory = :newInventory where b.isbn = :newIsbn")
+    public int updateInventory(
+            @Param("newInventory")int inventory,
+            @Param("newIsbn")String isbn);
+
+    @Transactional
+    @Modifying
+    @Query("update Book b set b.price = :newPrice where b.isbn = :newIsbn")
+    public int updatePrice(
             @Param("newPrice")int price,
             @Param("newIsbn")String isbn);
-    //todo updateInfo by WHAT?????? done
 
+    @Transactional
+    @Modifying
+    @Query("update Book b set b.category = :newCategory where b.isbn = :newIsbn")
+    public int updateCategory(
+            @Param("newCategory")String category,
+            @Param("newIsbn")String isbn);
+    @Transactional
+    @Modifying
+    @Query(value = "select * from book b where sales_figures order by sales_figures DESC limit :limitNum",nativeQuery = true)
+    public List<Book> searchTopBooks(@Param("limitNum")int limitNum);
+
+//    public List<TopFiveProjection> findFirst5BySalesFiguresOrderBySalesFigures(int salesFigures);
 }
 /*
 * 更新書籍資料

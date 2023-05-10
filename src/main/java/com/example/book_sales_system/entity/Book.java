@@ -1,11 +1,14 @@
 package com.example.book_sales_system.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 @Table(name = "book")
 public class Book {
     @Id
@@ -39,14 +42,16 @@ public class Book {
         this.category = category;
     }
 
-    public Book(String isbn, String bookName, String author, int price, int inventory) {
+
+
+    public Book(String isbn, String bookName, String author, int price) {
         this.isbn = isbn;
         this.bookName = bookName;
         this.author = author;
         this.price = price;
-        this.inventory = inventory;
     }
-//============================================================================================================
+
+    //============================================================================================================
 
     public String getCategory() {
         return category;
